@@ -3,6 +3,12 @@
 [![Flair](https://img.shields.io/badge/Powered%20by-Flair-ff69b4)](https://flair.dev)
 
 This repository contains boilerplate scripts, abis and schema for indexing (catch all contract events/transactions) and syncing it to your own database.
+
+This example would index events on the NFT collection
+Bored Ape Yatch Club in ethereum
+
+>Contract, check out the [etherscan](https://etherscan.io/address/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d#code) 
+
 > This example is for MongoDB, check out the [Database docs](https://docs.flair.dev/reference/database) for other databases.
 
 ## Table of Contents
@@ -18,7 +24,7 @@ This repository contains boilerplate scripts, abis and schema for indexing (catc
 
 ```bash
 git clone https://github.com/flair-sdk/starter-boilerplate.git my-indexer
-cd my-indexer
+cd flair-tutorial
 ```
 
 ### 2️⃣ Install, authenticate and set secrets:
@@ -34,7 +40,7 @@ pnpm flair secret set -n mongodb.uri -v mongodb+srv://USERNAME:PASSWORD@HOST:POR
 
 There are [`config.dev.json`](./config.dev.json) and [`config.prod.json`](./config.prod.json) sample configs for `dev` and `prod` clusters.
 
-Set a globally unique namespace in each config file (recommended to use `{ORG_NAME}-{ENV}`; e.g `sushiswap-dev` or `sushiswap-prod`):
+Set a globally unique namespace in each config file (recommended to use `{ORG_NAME}-{ENV}`; e.g `bored-ape-dev` or `bored-ape-prod`):
 
 ```bash
 # Setting configs for dev testing
@@ -54,7 +60,7 @@ pnpm generate-and-deploy
 
 ```bash
 # You can backfill for a specific block number, for all relevant events and transactions:
-pnpm flair backfill --chain 1 -b 17998797
+pnpm flair backfill --chain 1 -b 12287507
 
 # Or backfill for the recent data of your contracts in the last 5 minutes:
 pnpm flair backfill --chain 1 --min-timestamp="5 mins ago" -d backward --address-csv ./contracts.csv 
