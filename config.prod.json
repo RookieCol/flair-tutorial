@@ -1,0 +1,20 @@
+{
+  "cluster": "prod",
+  "namespace": "boilerplate-prod",
+  "databaseSync": false,
+  "indexers": [
+    {
+      "chainId": 1,
+      "enabled": false,
+      "emitBlocks": false,
+      "emitEvents": true,
+      "emitTransactions": true,
+      "emitTraces": false,
+      "resolveRevertReason": false,
+      "sources": [
+        "wss://chain-1.rpc.internal.flair.build",
+        "https://chain-1.rpc.internal.flair.build"
+      ]
+    }
+  ]
+}
