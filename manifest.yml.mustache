@@ -1,0 +1,50 @@
+manifest: 1.2.0
+
+defaultLogLevel: DEBUG
+
+cluster:
+  id: bored-ape-1
+  size: small
+
+namespace: bored-ape-dev
+
+
+filterGroups:
+  - id: default
+    updateStrategy: replace
+    addresses:
+      - fromFile: ./contracts.csv
+
+indexers:
+  - chainId: 1
+    enabled: false
+    ingestionFilterGroup: default
+    processingFilterGroup: default
+    emitEvents: true
+    emitBlocks: false
+    emitTransactions: true
+    emitTraces: true
+    resolveRevertReason: false
+    sources:
+      - endpoint: wss://eth-mainnet.g.alchemy.com/v2/QpfdWWLden6GgiHUfeypc1N2oEt5RoHW
+      - endpoint: https://eth-mainnet.g.alchemy.com/v2/QpfdWWLden6GgiHUfeypc1N2oEt5RoHW
+
+processors:
+  - id: track-bored-ape
+    handler: ./src/simple-processor/handler.ts
+    abi: ./src/simple-processor/abi.json
+
+solutions:
+  - source: '@flair-sdk/solution-basic-events-txs'
+    config:
+      events:
+        enabled: true
+      transactions:
+        enabled: true
+        
+  - source: '@flair-sdk/solution-database-mongodb'
+    config:
+      schema:
+        - src/schemas/*.yml
+      connectionUri: 'mongodb://admin:adminpassword@localhost:27017'
+      databaseName: flair
